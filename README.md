@@ -9,8 +9,14 @@ You can download the data via wget in linux, but note that the data is 34GB in s
 wget -r ftp://ngs.sanger.ac.uk/production/malaria/Resource/34/Pf7_vcf/
 ```
 
+## Begin with two questions
+Q1: Can be completed according to the material guidelines
+
+`How can we study the genetic structure characteristics of the target population through whole-genome variation data?" Keep this question in mind throughout the analysis, as it will guide how we interpret population genetic structure`
 ---
-## Begin with the question, "How can we study the genetic structure characteristics of the target population through whole-genome variation data?" Keep this question in mind throughout the analysis, as it will guide how we interpret population genetic structure.
+Q2: Self-design scheme
+
+`How to design and screen target sites for large-scale assessment of population characteristics and resistance information?`
 ---
 
 Note that each step is for reference only, please note the configuration of the specific software and environment, and refer to the corresponding wiki if in doubt。
@@ -97,8 +103,6 @@ Note that each step is for reference only, please note the configuration of the 
   iqtree -s Pf7_practice_chr13.filtered.snps.afa -m MFP -bb 1000 -nt 4 -pre Pf7_SNP_Phylo/tree
   ```
  # 4. IBD(tentative)
+ IBD (Identity by Descent) refers to the genetic inheritance where two alleles in an individual are identical because they were inherited from a common ancestor. In population genetics, IBD analysis helps identify the amount of genetic similarity between individuals or populations. It can provide insights into the genetic structure, gene flow, and history of a population, which is useful for understanding the genetic relationships and divergence within species, such as mosquitoes in your study. IBD analysis can also highlight areas of the genome subject to selection or genetic drift.
  [refrence](https://www.cog-genomics.org/plink2/ibd)
 
- # 5. Question after work
-
-How to design and screen target sites for large-scale assessment of population characteristics and resistance information?
