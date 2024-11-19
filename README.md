@@ -14,7 +14,7 @@ Q1: Can be completed according to the material guidelines
 
 `How can we study the genetic structure characteristics of the target population through whole-genome variation data?" Keep this question in mind throughout the analysis, as it will guide how we interpret population genetic structure`
 ---
-Q2: Self-design scheme
+Q2: Self-design scheme, you can build on this [plaltform](https://en.mgi-tech.com/products/atoplex/) to design solutions.
 
 `How to design and screen target sites for large-scale assessment of population characteristics and resistance information?`
 ---
