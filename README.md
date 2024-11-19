@@ -20,23 +20,23 @@ Note that each step is for reference only, please note the configuration of the 
    ```
     mkdir malaria_population
     cd malaria_population
-    cp /home/liuji/data/Pf7_practice_chr1.vcf ./
+    cp /home/liuji/data/Pf7_practice_chr13.vcf ./
 
    ```
 
 
 2. Individual Filtering: Use vcftools to calculate the missing rate per individual (--missing-indv) and filter out individuals with more than 20% missing data.
    ```
-   vcftools --vcf Pf7_practice_chr1.vcf --missing-indv
+   vcftools --vcf Pf7_practice_chr13.vcf --missing-indv
    awk '$5 > 0.2' out.imiss | cut -f1 > lowDP.indv
    ```
 3. Site Filtering: Remove low-quality individuals and filter variant sites with vcftools, setting thresholds for missing data, alleles, and quality scores.
    ```
-   vcftools --vcf Pf7_practice_chr1.vcf --max-missing 0.8 --max-alleles 2 --minQ 30 --remove-filtered-all --remove lowDP.indv --recode --recode-INFO-all --out Pf7_practice_chr1.filtered
+   vcftools --vcf Pf7_practice_chr13.vcf --max-missing 0.8 --max-alleles 2 --minQ 30 --remove-filtered-all --remove lowDP.indv --recode --recode-INFO-all --out Pf7_practice_chr13.filtered
    ```
 4. SNP Selection: Retain only SNPs by saving filtered VCF results to a SNP-specific file for downstream analyses.
   ```
-  cat Pf7_practice_chr1.filtered.recode.vcf > Pf7_practice_chr1.filtered.snps.vcf
+  cat Pf7_practice_chr13.filtered.recode.vcf > Pf7_practice_chr13.filtered.snps.vcf
   ```
 
 ---
@@ -44,7 +44,7 @@ Note that each step is for reference only, please note the configuration of the 
   ## PCA
 1. Prepare Files in PLINK: Convert the VCF file into PLINK format using plink2 to generate .bed, .fam, .ped, and .bim files. These are necessary for performing downstream analyses like admixture analysis.
   ```
-  plink2 --vcf Pf7_practice_chr1.filtered.snps.vcf --make-bed --allow-extra-chr --out Pf7
+  plink2 --vcf Pf7_practice_chr13.filtered.snps.vcf --make-bed --allow-extra-chr --out Pf7
   ```
 2. Generate Eigenvalues: Use PLINK to perform PCA (--pca command) on the prepared files to generate eigenvalues and eigenvectors. These values help explain the genetic variance across samples.
   ```
@@ -73,19 +73,19 @@ Note that each step is for reference only, please note the configuration of the 
 ```
 mkdir workshop_SNP_PhyloConstruction
 cd workshop_SNP_PhyloConstruction
-ln -s ~/Pf7_practice_chr1.filtered.snps.vcf ./
+ln -s ~/Pf7_practice_chr13.filtered.snps.vcf ./
 ```
 4. Convert VCF to TAB Format: Convert the VCF file into a TAB-delimited format.
 ```
-cat Pf7_practice_chr1.filtered.snps.vcf | vcf-to-tab > Pf7_practice_chr1.filtered.snps.vcf.tab
+cat Pf7_practice_chr13.filtered.snps.vcf | vcf-to-tab > Pf7_practice_chr13.filtered.snps.vcf.tab
 ```
 6. Convert TAB to FASTA: Use a custom Perl script to convert the TAB file into a SNP alignment in FASTA format.
 ```
-perl /home/renzirui/workshop_SNP_PhyloConstruction/vcf_tab_to_fasta_alignment.pl -i Pf7_practice_chr1.filtered.snps.vcf.tab > Pf7_practice_chr1.filtered.snps.afa
+perl /home/renzirui/workshop_SNP_PhyloConstruction/vcf_tab_to_fasta_alignment.pl -i Pf7_practice_chr13.filtered.snps.vcf.tab > Pf7_practice_chr13.filtered.snps.afa
 ```
 7. Build Phylogenetic Tree: Use IQ-TREE to construct the SNP phylogenetic tree with specified parameters.
 ```
-iqtree -s Pf7_practice_chr1.filtered.snps.afa -m MFP -bb 1000 -nt 4 -pre Pf7_SNP_Phylo/tree
+iqtree -s Pf7_practice_chr13.filtered.snps.afa -m MFP -bb 1000 -nt 4 -pre Pf7_SNP_Phylo/tree
 ```
 # IBD(tentative)
 [refrence](https://www.cog-genomics.org/plink2/ibd)
